@@ -181,7 +181,7 @@ if LOOP=$(losetup -Pf --show chr.img 2>/dev/null); then
         fi
         cat <<EOF > "$MNT/rw/autorun.scr"
 /ip dhcp-client disable [ /ip dhcp-client find ]
-/ip address add address=$ADDRESS interface=ether1
+/ip address add address=$ADDRESS network=$GATEWAY interface=ether1
 /ip route add gateway=$GATEWAY
 /ip dns set servers=$DNS
 /user set admin password="$RANDOM_ADMIN_PASS"
@@ -223,3 +223,4 @@ download_image
 create_autorun
 write_and_reboot
 exit 0
+
