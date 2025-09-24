@@ -779,13 +779,10 @@
 
             function updateCommand(version) {
                 const tool = document.querySelector('input[name="tool"]:checked').value;
-                let cmd;
-                const proxy = `${localStorage.getItem("gh-proxy-enabled") === "true"?" | sed 's#https://github.com#https:/gh-proxy.com/https://github.com#g'":""}`;
-                if (tool === "curl") {
-                    cmd = `<pre ${proxy === ""?"":"style='font-size:12px'"}><span class="bash">curl</span> <span class="url">https://ipsat98.github.io/MikroTik/chr.sh</span>${proxy} | <span class="bash">bash</span> -s <span class="version">${version}</span></pre>`;
-                } else { 
-                    cmd = `<pre ${proxy === ""?"":"style='font-size:11px'"}><span class="bash">wget</span> -O - <span class="url">https://ipsat98.github.io/MikroTik/chr.sh</span>${proxy}  | <span class="bash">bash</span> -s <span class="version">${version}</span></pre>`;
-                }
+                const proxy = localStorage.getItem("gh-proxy-enabled") === "true" ? " | <span class='text-blue-400'>sed</span> <span class='text-orange-400'>'s#https://github.com#https://gh-proxy.com/https://github.com#g'</span>" : "";
+                const cmd = tool === "curl" 
+                    ? `<pre class="text-slate-300"><code><span class="text-green-400">VERSION</span>=<span class="text-pink-400">${version}</span> <span class="text-blue-400">bash</span> \<(<span class="text-blue-400">curl</span> <span class="text-cyan-400">https://ipsat98.github.io/MikroTik/chr.sh</span>${proxy})</code></pre>`
+                    : `<pre class="text-slate-300"><code><span class="text-green-400">VERSION</span>=<span class="text-pink-400">${version}</span> <span class="text-blue-400">bash</span> \<(<span class="text-blue-400">wget -O - </span><span class="text-cyan-400">https://ipsat98.github.io/MikroTik/chr.sh</span>${proxy})</code></pre>`;
                 commandDiv.innerHTML = cmd;
             }
             document.querySelectorAll('input[name="tool"]').forEach(radio => {
