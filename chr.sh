@@ -129,7 +129,7 @@ download_image(){
             fi
             ;; 
         aarch64)
-             IMG_URL="https://github.com/elseif/MikroTikPatch/releases/download/$VERSION-arm64/chr-$VERSION-arm64.img.zip"
+            IMG_URL="https://github.com/elseif/MikroTikPatch/releases/download/$VERSION-arm64/chr-$VERSION-arm64.img.zip"
             ;; 
         *)
             echo "$MSG_UNSUPPORTED_ARCH"
@@ -141,7 +141,7 @@ download_image(){
         curl -L -# -o /tmp/chr.img.zip "$IMG_URL" || { echo "$MSG_DOWNLOAD_FAILED"; exit 1; }
     elif command -v wget >/dev/null 2>&1; then
         wget -nv -O /tmp/chr.img.zip "$IMG_URL" || { echo "$MSG_DOWNLOAD_FAILED"; exit 1; }
-    el
+    else
         echo "$MSG_DOWNLOAD_ERROR $IMG_URL"
         exit 1
     fi
@@ -157,7 +157,6 @@ download_image(){
 }
 
 create_autorun() {
-    
     if LOOP=$(losetup -Pf --show chr.img 2>/dev/null); then
         sleep 1
         MNT=/tmp/chr
@@ -201,7 +200,6 @@ EOF
     fi
 }
 
-
 write_and_reboot() {
     printf "$MSG_WARNING\n" "$STORAGE"
     read -p "$MSG_CONFIRM_CONTINUE" confirm < /dev/tty
@@ -217,6 +215,7 @@ write_and_reboot() {
     reboot -f
 }
 
+# Main
 set_language
 show_system_info
 select_version
