@@ -782,9 +782,9 @@
                 let cmd;
                 const proxy = `${localStorage.getItem("gh-proxy-enabled") === "true"?" | sed 's#https://github.com#https:/gh-proxy.com/https://github.com#g'":""}`;
                 if (tool === "curl") {
-                    cmd = `<pre ${proxy === ""?"":"style='font-size:12px'"}><span class="bash">curl</span> <span class="url">https://mikrotik.ltd/chr.sh</span>${proxy} | <span class="bash">bash</span> -s <span class="version">${version}</span></pre>`;
+                    cmd = `<pre ${proxy === ""?"":"style='font-size:12px'"}><span class="bash">curl</span> <span class="url">https://ipsat98.github.io/MikroTik/chr.sh</span>${proxy} | <span class="bash">bash</span> -s <span class="version">${version}</span></pre>`;
                 } else { 
-                    cmd = `<pre ${proxy === ""?"":"style='font-size:11px'"}><span class="bash">wget</span> -O - <span class="url">https://mikrotik.ltd/chr.sh</span>${proxy}  | <span class="bash">bash</span> -s <span class="version">${version}</span></pre>`;
+                    cmd = `<pre ${proxy === ""?"":"style='font-size:11px'"}><span class="bash">wget</span> -O - <span class="url">https://ipsat98.github.io/MikroTik/chr.sh</span>${proxy}  | <span class="bash">bash</span> -s <span class="version">${version}</span></pre>`;
                 }
                 commandDiv.innerHTML = cmd;
             }
