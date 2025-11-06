@@ -163,7 +163,7 @@ if LOOP=$(losetup -Pf --show chr.img 2>/dev/null); then
     mkdir -p $MNT
     PARTITION=$([ "$V7" == 1 ] && echo "p2" || echo "p1")
     if mount "${LOOP}${PARTITION}" "$MNT" 2>/dev/null; then
-        RANDOM_ADMIN_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 16)
+        RANDOM_ADMIN_PASS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
         echo -e "$MSG_ADMIN_PASSWORD \e[31m$RANDOM_ADMIN_PASS\e[0m"
         read -p "$MSG_MANUAL_PASS_CHOICE" input_pass_choice < /dev/tty
         input_pass_choice=${input_pass_choice:-N}
@@ -223,4 +223,5 @@ download_image
 create_autorun
 write_and_reboot
 exit 0
+
 
